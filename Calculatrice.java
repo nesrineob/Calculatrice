@@ -4,7 +4,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-//test
 
 @SuppressWarnings("serial")
 public class Calculatrice extends JFrame implements ActionListener
