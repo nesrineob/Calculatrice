@@ -4,16 +4,19 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+//test
+
 @SuppressWarnings("serial")
 public class Calculatrice extends JFrame implements ActionListener
 {
 	
-	private final  int           GAP              = 10 ;
+	private final  int           GAP              = 10 ; // constante pour l'écrat entre les touches
 	
-	private		   String        s                = "" ;
-	private        Calcul        c                     ;
-	private        String        derniereOperation     ;
+	private		   String        s                = "" ; // va contenir la saisie de l'utilisateur
+	private        Calcul        c                     ; // va gérer les calculs
+	private        String        derniereOperation     ; 
 	private        double        premierTerme     = 0.0;
+	private        double        secondTerme      = 0.0;
 	private        Double        tempDouble            ;
 
 
@@ -130,9 +133,9 @@ public class Calculatrice extends JFrame implements ActionListener
 	
 	private void ajouterChiffres()
 	{
-		touches.add(useless1);
-		touches.add(useless2);
-		touches.add(useless3);
+		//touches.add(useless1);
+		//touches.add(useless2);
+		//touches.add(useless3);
 		touches.add(un);
 		touches.add(deux);
 		touches.add(trois);
@@ -195,46 +198,34 @@ public class Calculatrice extends JFrame implements ActionListener
 	
 	private void gestionSignes(ActionEvent e)
 	{
+		
+		
 		if(e.getSource() == plus)
 		{
-			derniereOperation = "";
 			derniereOperation = "plus";
 			premierTerme      = Double.parseDouble( s.toString()); 
-			c.addition( premierTerme );
 			s = "";
-			System.out.println(s.toString());
 		}		
 		
 		if(e.getSource () == moins)
 		{
-			derniereOperation = "";
 			derniereOperation = "moins";
 			premierTerme      = Double.parseDouble( s.toString()); 
-			c.soustraction( premierTerme );
 			s = "";
-			System.out.println(s.toString());
 		}		
 		
 		if(e.getSource() == fois)
 		{
-			derniereOperation = "";
-			derniereOperation = "fois";
+			derniereOperation = "fois"; 
 			premierTerme      = Double.parseDouble( s.toString()); 
-			c.multiplication( premierTerme );
+
 			s = "";
-			System.out.println(s.toString());
 		}		
 		
 		if(e.getSource() == effacer)
-		{
-			derniereOperation = "";
-		
+		{		
 			c.reset();
 			s = "";			
-			//ecran.setText("Mémoire effacée avec succès.");
-			
-			
-			
 			ecran.setText("Hello World !");
 		}
 	}
@@ -294,19 +285,20 @@ public class Calculatrice extends JFrame implements ActionListener
 	{
 		if(e.getSource() == egal)
 		{			
+			secondTerme = Double.parseDouble( s.toString()); 
+			
 			if(derniereOperation == "plus")
-				c.addition( premierTerme );
+				c.addition( premierTerme, secondTerme );
 			
 			if(derniereOperation == "moins")
-				c.soustraction( premierTerme );	
+				c.soustraction( premierTerme, secondTerme );	
 			if(derniereOperation == "fois")
-				c.multiplication( premierTerme );
+				c.multiplication( premierTerme, secondTerme );
 			
 			
 			tempDouble = new Double(c.getResultat() );
 			
 			ecran.setText( String.valueOf(tempDouble.intValue() ) );
-			s = c.getResultat() ;
 		}
 	}
 	
